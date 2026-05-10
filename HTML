@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Gerencial Consolidado — FFE 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+:root {
+–navy:        #08111f;
+–navy-2:      #0d1e35;
+–navy-3:      #15294a;
+–navy-4:      #1d3560;
+–gold:        #b8973a;
+–gold-light:  #d4b45a;
+–gold-pale:   #f0dfa0;
+–cream:       #f4efe4;
+–cream-dark:  #ede6d8;
+–text:        #18202e;
+–text-soft:   #4a5568;
+–border:      rgba(184,151,58,0.22);
+–red:         #a31c1c;
+–amber:       #b06a00;
+–green:       #165c30;
+–blue-tag:    #123a6e;
+–sidebar-w:   270px;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+background: var(–cream);
+color: var(–text);
+font-family: ‘Crimson Pro’, Georgia, serif;
+font-size: 17px;
+line-height: 1.7;
+display: flex;
+}
+
+/* ─── SIDEBAR ─── */
+#sidebar {
+width: var(–sidebar-w);
+min-height: 100vh;
+background: var(–navy);
+position: fixed;
+top: 0; left: 0;
+overflow-y: auto;
+z-index: 100;
+border-right: 2px solid var(–gold);
+display: flex;
+flex-direction: column;
+}
+
+.sidebar-brand {
+padding: 28px 22px 20px;
+border-bottom: 1px solid rgba(184,151,58,0.3);
+}
+.sidebar-brand .emblem {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 9px;
+letter-spacing: 3px;
+color: var(–gold);
+text-transform: uppercase;
+display: block;
+margin-bottom: 8px;
+}
+.sidebar-brand h2 {
+color: var(–cream);
+font-size: 1rem;
+font-weight: 600;
+line-height: 1.35;
+}
+
+.sidebar-nav { padding: 14px 0; flex: 1; }
+.nav-group-label {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 8px;
+letter-spacing: 2.5px;
+text-transform: uppercase;
+color: rgba(184,151,58,0.6);
+padding: 12px 22px 4px;
+display: block;
+}
+.nav-link {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 9px 22px;
+color: rgba(244,239,228,0.72);
+text-decoration: none;
+font-size: 0.88rem;
+transition: all 0.18s;
+border-left: 3px solid transparent;
+line-height: 1.3;
+}
+.nav-link:hover, .nav-link.active {
+color: var(–gold-pale);
+background: rgba(184,151,58,0.1);
+border-left-color: var(–gold);
+}
+.nav-link .nav-ico { font-size: 13px; opacity: 0.8; width: 18px; flex-shrink: 0; }
+.nav-link .nav-num {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 8px;
+color: var(–gold);
+background: rgba(184,151,58,0.15);
+padding: 1px 5px;
+border-radius: 2px;
+margin-left: auto;
+flex-shrink: 0;
+}
+
+.sidebar-footer {
+padding: 16px 22px;
+border-top: 1px solid rgba(184,151,58,0.2);
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 9px;
+color: rgba(244,239,228,0.35);
+letter-spacing: 1px;
+line-height: 1.8;
+}
+
+/* ─── MAIN ─── */
+#main {
+margin-left: var(–sidebar-w);
+flex: 1;
+min-width: 0;
+}
+
+/* ─── PAGE HEADER ─── */
+#page-header {
+background: var(–navy-2);
+border-bottom: 3px solid var(–gold);
+padding: 52px 60px 40px;
+position: relative;
+overflow: hidden;
+}
+#page-header::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background:
+repeating-linear-gradient(135deg,
+transparent 0, transparent 48px,
+rgba(184,151,58,0.04) 48px, rgba(184,151,58,0.04) 49px);
+pointer-events: none;
+}
+#page-header::after {
+content: ‘’;
+position: absolute;
+right: -60px; bottom: -80px;
+width: 340px; height: 340px;
+border-radius: 50%;
+border: 40px solid rgba(184,151,58,0.06);
+pointer-events: none;
+}
+.hdr-kicker {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+letter-spacing: 4px;
+text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 14px;
+display: block;
+}
+#page-header h1 {
+font-size: 2.6rem;
+font-weight: 700;
+color: var(–cream);
+line-height: 1.12;
+margin-bottom: 18px;
+}
+.hdr-meta-row {
+display: flex;
+flex-wrap: wrap;
+gap: 28px;
+margin-top: 20px;
+padding-top: 20px;
+border-top: 1px solid rgba(184,151,58,0.25);
+}
+.hdr-meta-item { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; color: rgba(244,239,228,0.55); line-height: 1.8; }
+.hdr-meta-item strong { color: var(–gold-light); display: block; font-size: 12px; margin-bottom: 2px; }
+
+/* ─── STAT BAR ─── */
+.stat-bar {
+background: var(–navy-3);
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+border-bottom: 2px solid var(–gold);
+}
+.stat-item {
+padding: 20px 28px;
+border-right: 1px solid rgba(184,151,58,0.15);
+text-align: center;
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 2.1rem;
+color: var(–gold-light);
+line-height: 1;
+margin-bottom: 5px;
+}
+.stat-lbl {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 9px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: rgba(244,239,228,0.5);
+}
+
+/* ─── CONTENT ─── */
+#content { padding: 52px 56px 100px; }
+
+/* ─── SECTION ─── */
+.sec {
+margin-bottom: 70px;
+scroll-margin-top: 24px;
+}
+.sec-hdr {
+display: flex;
+align-items: flex-start;
+gap: 16px;
+margin-bottom: 28px;
+padding-bottom: 14px;
+border-bottom: 2px solid var(–navy-3);
+}
+.sec-ico {
+width: 44px; height: 44px;
+background: var(–navy);
+border: 2px solid var(–gold);
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 18px;
+flex-shrink: 0;
+margin-top: 2px;
+}
+.sec-meta { flex: 1; }
+.sec-tag {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 9px;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 4px;
+display: block;
+}
+.sec-title {
+font-size: 1.5rem;
+font-weight: 700;
+color: var(–navy);
+line-height: 1.2;
+}
+.sec-subtitle {
+font-size: 0.95rem;
+color: var(–text-soft);
+font-style: italic;
+margin-top: 4px;
+}
+
+/* ─── SUB-SECTION ─── */
+.subsec { margin-bottom: 32px; }
+.subsec-title {
+font-size: 1.05rem;
+font-weight: 700;
+color: var(–navy-4);
+margin-bottom: 12px;
+padding-left: 12px;
+border-left: 3px solid var(–gold);
+}
+
+/* ─── CARD ─── */
+.card {
+background: #fff;
+border: 1px solid #ddd5c4;
+border-radius: 5px;
+padding: 22px 26px;
+margin-bottom: 14px;
+position: relative;
+}
+.card-title {
+font-size: 1rem;
+font-weight: 700;
+color: var(–navy);
+margin-bottom: 4px;
+}
+.card-date {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 9px;
+letter-spacing: 1px;
+color: var(–text-soft);
+margin-bottom: 10px;
+display: block;
+}
+.card-body { font-size: 0.96rem; color: #2a2a3a; line-height: 1.65; }
+.card-body ul { margin: 8px 0 0 20px; }
+.card-body li { margin-bottom: 3px; }
+
+.prio-high  { border-left: 5px solid var(–red); }
+.prio-med   { border-left: 5px solid var(–amber); }
+.prio-low   { border-left: 5px solid var(–green); }
+.prio-info  { border-left: 5px solid var(–navy-4); }
+
+/* ─── TAGS ─── */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.tag {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 9px;
+letter-spacing: 0.8px;
+padding: 3px 9px;
+border-radius: 2px;
+text-transform: uppercase;
+font-weight: 700;
+}
+.t-resp  { background: #e5edff; color: #0a2a6e; }
+.t-prazo { background: #fff3e0; color: #6b3500; }
+.t-ok    { background: #e5f5ec; color: #0e4723; }
+.t-alert { background: #fdecea; color: #7a1010; }
+.t-info  { background: #eff3f8; color: #1e3a5c; }
+
+/* ─── TABLES ─── */
+.tbl-wrap { overflow-x: auto; margin: 16px 0; }
+table.rtbl {
+width: 100%;
+border-collapse: collapse;
+font-size: 0.88rem;
+}
+table.rtbl thead tr { background: var(–navy); color: var(–cream); }
+table.rtbl thead th {
+padding: 10px 14px;
+text-align: left;
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 9px;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+font-weight: 700;
+}
+table.rtbl tbody tr { border-bottom: 1px solid #e5ddd0; }
+table.rtbl tbody tr:nth-child(even) { background: #faf7f2; }
+table.rtbl tbody tr:hover { background: #f0ead8; }
+table.rtbl td { padding: 9px 14px; vertical-align: top; }
+table.rtbl tfoot tr { background: var(–cream-dark); border-top: 2px solid var(–navy); }
+table.rtbl tfoot td { padding: 10px 14px; font-weight: 700; font-family: ‘JetBrains Mono’, monospace; font-size: 0.82rem; }
+
+/* ─── STATUS PILL ─── */
+.pill {
+display: inline-block;
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 8px;
+letter-spacing: 1px;
+padding: 2px 8px;
+border-radius: 20px;
+text-transform: uppercase;
+font-weight: 700;
+white-space: nowrap;
+}
+.p-red    { background: #fdecea; color: #7a1010; }
+.p-amber  { background: #fff3e0; color: #6b3500; }
+.p-green  { background: #e5f5ec; color: #0e4723; }
+.p-blue   { background: #e5edff; color: #0a2a6e; }
+.p-grey   { background: #f0f0f0; color: #4a4a5a; }
+
+/* ─── HIGHLIGHT BOX ─── */
+.hbox {
+background: var(–navy-2);
+color: var(–cream);
+border-left: 4px solid var(–gold);
+border-radius: 4px;
+padding: 18px 22px;
+font-size: 0.94rem;
+line-height: 1.65;
+margin: 14px 0;
+}
+.hbox strong { color: var(–gold-light); }
+.hbox ul { margin: 8px 0 0 20px; }
+.hbox li { margin-bottom: 4px; }
+
+/* ─── DIVIDER ─── */
+hr.div { border: none; border-top: 1px solid var(–border); margin: 50px 0; }
+
+/* ─── RESULTS GRID ─── */
+.results-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 12px;
+margin: 16px 0;
+}
+.result-item {
+background: var(–navy);
+color: var(–cream);
+border-radius: 4px;
+padding: 16px 18px;
+border-left: 3px solid var(–gold);
+}
+.result-val {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 1.6rem;
+color: var(–gold-light);
+line-height: 1;
+margin-bottom: 5px;
+}
+.result-lbl {
+font-size: 0.78rem;
+color: rgba(244,239,228,0.65);
+line-height: 1.3;
+}
+
+/* ─── PRINT ─── */
+@media print {
+#sidebar { display: none; }
+#main { margin-left: 0; }
+#page-header { padding: 24px 32px; }
+#content { padding: 24px 32px; }
+.card { break-inside: avoid; }
+.sec { break-before: page; }
+}
+
+/* ─── SCROLLBAR ─── */
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: rgba(184,151,58,0.3); border-radius: 2px; }
+</style>
+
+</head>
+<body>
+
+<!-- ═══════════════════════════════════ SIDEBAR ═══ -->
+
+<nav id="sidebar">
+  <div class="sidebar-brand">
+    <span class="emblem">⚓ Marinha do Brasil</span>
+    <h2>Força de Fuzileiros<br>da Esquadra — FFE</h2>
+  </div>
+
+  <div class="sidebar-nav">
+    <span class="nav-group-label">Sumário</span>
+    <a class="nav-link" href="#exec"><span class="nav-ico">📊</span> Sumário Executivo</a>
+
+```
+<span class="nav-group-label">Operações</span>
+<a class="nav-link" href="#agata"><span class="nav-ico">🚁</span> Op. Ágata Norte <span class="nav-num">12</span></a>
+<a class="nav-link" href="#furnas"><span class="nav-ico">🗺</span> Exercício Furnas <span class="nav-num">09</span></a>
+<a class="nav-link" href="#formosa"><span class="nav-ico">💣</span> Exercício Formosa <span class="nav-num">03</span></a>
+<a class="nav-link" href="#jda"><span class="nav-ico">⚓</span> Op. Jeanne D'Arc <span class="nav-num">03</span></a>
+
+<span class="nav-group-label">Prontidão</span>
+<a class="nav-link" href="#aav"><span class="nav-ico">🇺🇳</span> AAV — ONU <span class="nav-num">09</span></a>
+<a class="nav-link" href="#jammers"><span class="nav-ico">📡</span> Jammers / NBQR <span class="nav-num">05</span></a>
+<a class="nav-link" href="#nimitz"><span class="nav-ico">☢</span> USS Nimitz <span class="nav-num">03</span></a>
+<a class="nav-link" href="#lideranca"><span class="nav-ico">🎖</span> Liderança <span class="nav-num">01</span></a>
+
+<span class="nav-group-label">Gestão</span>
+<a class="nav-link" href="#financeiro"><span class="nav-ico">💰</span> Recursos Financeiros <span class="nav-num">08</span></a>
+<a class="nav-link" href="#logistica"><span class="nav-ico">🚛</span> Logística e Material <span class="nav-num">07</span></a>
+<a class="nav-link" href="#aeroporto"><span class="nav-ico">✈</span> Aeroporto Furnas <span class="nav-num">04</span></a>
+
+<span class="nav-group-label">Pessoal</span>
+<a class="nav-link" href="#pessoal"><span class="nav-ico">👤</span> Pessoal / Oficiais <span class="nav-num">04</span></a>
+
+<span class="nav-group-label">Agenda</span>
+<a class="nav-link" href="#cerimonial"><span class="nav-ico">📅</span> Eventos e Cerimonial <span class="nav-num">07</span></a>
+
+<span class="nav-group-label">Consolidado</span>
+<a class="nav-link" href="#pendencias"><span class="nav-ico">⚡</span> Ações Pendentes <span class="nav-num">22</span></a>
+<a class="nav-link" href="#diretrizes"><span class="nav-ico">📌</span> Diretrizes do ComFFE</a>
+```
+
+  </div>
+
+  <div class="sidebar-footer">
+    Período: 02 ABR – 09 MAI 2026<br>
+    Gerado em: 09 MAI 2026<br>
+    Uso Interno — FFE
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════ MAIN ═══ -->
+
+<div id="main">
+
+<!-- PAGE HEADER -->
+
+<div id="page-header">
+  <span class="hdr-kicker">☆ Documento Interno — Uso Restrito ☆</span>
+  <h1>Relatório de Acompanhamento<br>Gerencial Consolidado</h1>
+  <div style="color:rgba(244,239,228,0.7); font-size:1.05rem; font-style:italic; margin-top:6px;">
+    Comunicações entre o Alte Taulois (ComFFE) e o Alte Adauto (CEM-FFE) — Período: 02 ABR a 09 MAI 2026
+  </div>
+  <div class="hdr-meta-row">
+    <div class="hdr-meta-item"><strong>Comandante FFE</strong>Almirante Taulois</div>
+    <div class="hdr-meta-item"><strong>Chefe do Estado-Maior</strong>Almirante Adauto</div>
+    <div class="hdr-meta-item"><strong>Período</strong>02 ABR 2026 — 09 MAI 2026</div>
+    <div class="hdr-meta-item"><strong>Fontes</strong>WhatsApp — Almirantes FFE (2 grupos)</div>
+    <div class="hdr-meta-item"><strong>Produzido em</strong>09 MAI 2026</div>
+  </div>
+</div>
+
+<!-- STAT BAR -->
+
+<div class="stat-bar">
+  <div class="stat-item"><div class="stat-num">11</div><div class="stat-lbl">Áreas temáticas</div></div>
+  <div class="stat-item"><div class="stat-num">22</div><div class="stat-lbl">Ações pendentes</div></div>
+  <div class="stat-item"><div class="stat-num">4</div><div class="stat-lbl">Prazos críticos</div></div>
+  <div class="stat-item"><div class="stat-num" style="color:#e88;">6</div><div class="stat-lbl">Urgências ativas</div></div>
+  <div class="stat-item"><div class="stat-num" style="color:#7be;"> 7</div><div class="stat-lbl">Concluídos</div></div>
+  <div class="stat-item"><div class="stat-num">27 MAI</div><div class="stat-lbl">Próximo prazo crítico (AAV)</div></div>
+</div>
+
+<!-- CONTENT -->
+
+<div id="content">
+
+<!-- ═══ SUMÁRIO EXECUTIVO ═══ -->
+
+<div class="sec" id="exec">
+  <div class="sec-hdr">
+    <div class="sec-ico">📊</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 01</span>
+      <div class="sec-title">Sumário Executivo</div>
+      <div class="sec-subtitle">Visão consolidada do período 02 ABR – 09 MAI 2026</div>
+    </div>
+  </div>
+
+  <div class="hbox">
+    Este relatório consolida <strong>todas as comunicações</strong> ocorridas entre o Almirante Taulois (ComFFE) e o Almirante Adauto (CEM-FFE) no período de referência, extraídas de dois grupos de WhatsApp. As tratativas abrangem <strong>11 grandes áreas temáticas</strong>: operações em curso (Ágata Norte, Furnas, Formosa, Jeanne D'Arc), prontidão e avaliação da ONU (AAV), gestão de recursos financeiros, infraestrutura e logística, pessoal, cerimonial e eventos.
+    <br><br>O documento visa permitir o acompanhamento eficaz de todas as ações, identificando responsáveis, prazos e pendências críticas.
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="rtbl">
+      <thead><tr><th>Área Temática</th><th>Nº de Itens</th><th>Status Geral</th></tr></thead>
+      <tbody>
+        <tr><td>Operação Ágata Norte</td><td>12</td><td><span class="pill p-green">✓ Concluída</span></td></tr>
+        <tr><td>Exercício Furnas</td><td>9</td><td><span class="pill p-amber">Em andamento</span></td></tr>
+        <tr><td>Exercício Formosa</td><td>3</td><td><span class="pill p-amber">Planejamento</span></td></tr>
+        <tr><td>Operação Jeanne D'Arc</td><td>3</td><td><span class="pill p-green">✓ Concluída com êxito</span></td></tr>
+        <tr><td>AAV – Avaliação ONU</td><td>9</td><td><span class="pill p-red">Crítico – 27 MAI</span></td></tr>
+        <tr><td>Jammers / Interferidores</td><td>5</td><td><span class="pill p-red">Crítico – solução pendente</span></td></tr>
+        <tr><td>USS Nimitz / NBQR</td><td>3</td><td><span class="pill p-green">✓ MSG expedida</span></td></tr>
+        <tr><td>Gestão de Recursos Financeiros</td><td>8</td><td><span class="pill p-amber">Em tratativas</span></td></tr>
+        <tr><td>Logística e Material</td><td>7</td><td><span class="pill p-amber">Em andamento</span></td></tr>
+        <tr><td>Aeroporto de Furnas</td><td>4</td><td><span class="pill p-blue">Em tramitação</span></td></tr>
+        <tr><td>Pessoal / Oficiais</td><td>4</td><td><span class="pill p-blue">Em acompanhamento</span></td></tr>
+        <tr><td>Liderança e Prontidão</td><td>1</td><td><span class="pill p-green">✓ Divulgado</span></td></tr>
+        <tr><td>Cerimonial e Eventos</td><td>7</td><td><span class="pill p-blue">Definido / Parcial</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ OP. ÁGATA NORTE ═══ -->
+
+<div class="sec" id="agata">
+  <div class="sec-hdr">
+    <div class="sec-ico">🚁</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 02 — Operações</span>
+      <div class="sec-title">Operação Ágata Norte</div>
+      <div class="sec-subtitle">Operação de combate ao garimpo ilegal na Amazônia — Amazônia Ocidental</div>
+    </div>
+  </div>
+
+  <div class="card prio-low">
+    <div class="card-title">Visão geral da operação</div>
+    <div class="card-body">
+      O Almirante Adauto embarcou na madrugada de 20/21 ABR para a operação, com regresso ao Rio de Janeiro em 09 MAI. Ao longo da operação, exerceu as funções de CEM remotamente via videoconferência. O CMG FN Marinho permaneceu na missão após o retorno do Almirante Adauto. Efetivo inicial embarcado: <strong>12-54</strong>, decolagem via CAN Galeão (10 ABR, 07h) para Manaus.
+    </div>
+    <div class="tags"><span class="tag t-ok">✓ Concluída em 09 MAI</span></div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Cronologia de eventos</div>
+    <div class="tbl-wrap">
+      <table class="rtbl">
+        <thead><tr><th>Data</th><th>Ação / Evento</th><th>Responsável</th></tr></thead>
+        <tbody>
+          <tr><td>10 ABR</td><td>Pessoal e material embarcaram no CAN Galeão (07h), decolagem para Manaus. Efetivo 12-54.</td><td>CEM / EM FFE</td></tr>
+          <tr><td>21 ABR</td><td>Embarque do Alte Adauto para Ágata Norte.</td><td>Alte Adauto</td></tr>
+          <tr><td>27 ABR</td><td>FORC concluiu 2ª fase (Dissimulação Tática PD-6). NAsH Oswaldo Cruz em trânsito para fronteira com Peru.</td><td>FORC / ComDivRib</td></tr>
+          <tr><td>28 ABR</td><td>Embarque dos agentes do IBAMA. Concentração das tropas em Tefé (PD-7). Início da 3ª fase (ações decisivas).</td><td>FORC</td></tr>
+          <tr><td>04 MAI</td><td>Operação coordenada no Japurá e Jutaí: 47 dragas neutralizadas, 3 destruídas. Diversas apreensões. Notícia publicada no G1/Globo em 05 MAI.</td><td>ComDivRib</td></tr>
+          <tr><td>08 MAI</td><td>ASSHOP em Tefé. Retorno previsto do Alte Adauto para o Rio de Janeiro.</td><td>FORC</td></tr>
+          <tr><td>09 MAI</td><td>Chegada ao Rio de Janeiro. Consolidação dos resultados.</td><td>Alte Adauto</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Resultados consolidados</div>
+    <div class="results-grid">
+      <div class="result-item"><div class="result-val">141</div><div class="result-lbl">Embarcações inspecionadas</div></div>
+      <div class="result-item"><div class="result-val">51</div><div class="result-lbl">Dragas neutralizadas / destruídas</div></div>
+      <div class="result-item"><div class="result-val">3.500+</div><div class="result-lbl">Milhas navegadas</div></div>
+      <div class="result-item"><div class="result-val">10,8h</div><div class="result-lbl">Horas de voo</div></div>
+      <div class="result-item"><div class="result-val">142</div><div class="result-lbl">Pessoas atendidas no ASSHOP</div></div>
+      <div class="result-item"><div class="result-val">7.043</div><div class="result-lbl">Medicamentos distribuídos</div></div>
+      <div class="result-item"><div class="result-val">R$ 22M+</div><div class="result-lbl">Prejuízo estimado ao crime ambiental</div></div>
+      <div class="result-item"><div class="result-val">307 kg</div><div class="result-lbl">Ouro ilegal impedido de exploração</div></div>
+      <div class="result-item"><div class="result-val">800 kg</div><div class="result-lbl">Mercúrio mitigado</div></div>
+      <div class="result-item"><div class="result-val">2.008 ha</div><div class="result-lbl">Área de proteção ambiental</div></div>
+    </div>
+  </div>
+
+  <div class="card prio-info">
+    <div class="card-title">Destaques e desdobramentos</div>
+    <div class="card-body">
+      <ul>
+        <li>Apresentação ao Gen Div Paulo Ferreira (Oficiais Generais do MD) a bordo — boa repercussão.</li>
+        <li>Almirante Félix demonstrou interesse em realizar <strong>Riverex de grande vulto em novembro</strong>, envolvendo FFE. Articulação com ComDivRib necessária.</li>
+        <li>Sugestões de aquisições conjuntas de <strong>Drones e Lanchas Blindadas pelo MD</strong> foram bem recebidas.</li>
+        <li>Resultados incluídos na palestra da Reunião do CGCFN (04–05 MAI), com fotografias.</li>
+      </ul>
+    </div>
+    <div class="tags">
+      <span class="tag t-info">Riverex NOV: planejar com ComDivRib</span>
+      <span class="tag t-info">Drones/Lanchas: aquisição conjunta MD</span>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ EXERCÍCIO FURNAS ═══ -->
+
+<div class="sec" id="furnas">
+  <div class="sec-hdr">
+    <div class="sec-ico">🗺</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 03 — Operações</span>
+      <div class="sec-title">Exercício Furnas</div>
+      <div class="sec-subtitle">Exercício de grande escala — Furnas (MG) — Previsão: meados de maio 2026</div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Reuniões de planejamento realizadas</div>
+    <div class="tbl-wrap">
+      <table class="rtbl">
+        <thead><tr><th>Data</th><th>Reunião</th><th>Participantes</th></tr></thead>
+        <tbody>
+          <tr><td>13 ABR (manhã)</td><td>Reunião AAV</td><td>Cmte DivAnf, DivLit, CEM FFE, Cappucci, F-10, F-70, F-30, F-40, CMatFN, COpPazNav, Gabinete, ComSoc, CMG Bragança, CF Fernando Lima</td></tr>
+          <tr><td>13 ABR (manhã)</td><td>Reunião Furnas</td><td>Cmtes 3 Divisões, Cappucci, Cmtes Tonelero e CmbAe, Chefes EM FFE, Gabinete, ComSoc, Cmte BFNRM, Cmte BFNIG, COpPazNav</td></tr>
+          <tr><td>13 ABR (tarde)</td><td>Reunião de Diretrizes</td><td>Mesmos atores + Comandos Subordinados (cada um com apresentação própria)</td></tr>
+          <tr><td>05 MAI</td><td>2ª Reunião de Furnas (EM FFE)</td><td>EM da FFE + Comandos subordinados — apresentação mais consolidada</td></tr>
+          <tr><td>11 MAI (seg)</td><td>Reunião de Coordenação (DivAnf)</td><td>Todos os Cmtes de OM — auditório DivAnf (confirmado)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Pontos críticos do planejamento</div>
+    <div class="tbl-wrap">
+      <table class="rtbl">
+        <thead><tr><th>#</th><th>Ponto Crítico</th><th>Status</th><th>Responsável</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>DOR do COC – assinatura MD pendente. Obra do COC depende do documento. Prazo IAM em risco.</td><td><span class="pill p-red">Crítico</span></td><td>CEM / F-40</td></tr>
+          <tr><td>2</td><td>Efetivo em Furnas — limitação por impacto logístico. Cada Cmd Subord justifica por MSG se precisar de mais.</td><td><span class="pill p-amber">Em definição</span></td><td>EM FFE</td></tr>
+          <tr><td>3</td><td>Vinda de estrangeiros e coordenação com CGCFN (possível presença chinesa na parte de OpRib).</td><td><span class="pill p-amber">Em andamento</span></td><td>F-30 / CGCFN</td></tr>
+          <tr><td>4</td><td>Busca de recursos e munições com CON-20 (reunião marcada).</td><td><span class="pill p-amber">Em andamento</span></td><td>CEM / F-40</td></tr>
+          <tr><td>5</td><td>Revalidação de granadas de Morteiro 120mm.</td><td><span class="pill p-red">Pendente</span></td><td>CMatFN / F-40</td></tr>
+          <tr><td>6</td><td>Coordenação PUC-Rio (Prof. Kai Kenkel) – alunos de RI no exercício. Verificar gargalo de coordenação.</td><td><span class="pill p-amber">Verificar</span></td><td>CEM / EM FFE</td></tr>
+          <tr><td>7</td><td>Alinhamento SGM: reunião no dia anterior a Formosa — impacto nos ensaios.</td><td><span class="pill p-amber">Ajustar cronograma</span></td><td>Todos Almirantes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card prio-high">
+    <div class="card-title">Efetivo necessário — DivAnf</div>
+    <div class="card-date">06–07 MAI 2026</div>
+    <div class="card-body">
+      O ComFFE compartilhou documento de delimitação de efetivos. Dimensionamento da DivAnf:
+      <div class="tbl-wrap" style="margin-top:10px;">
+        <table class="rtbl">
+          <thead><tr><th>Cenário</th><th>Efetivo Total</th><th>Vtrs Militares</th><th>Ônibus</th></tr></thead>
+          <tbody>
+            <tr><td>Ideal</td><td>455 militares</td><td>60</td><td>395</td></tr>
+            <tr><td>Mínimo</td><td>415 militares</td><td>60</td><td>355</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="tags">
+      <span class="tag t-resp">Resp: ComDivAnf / ComFFE</span>
+      <span class="tag t-alert">⚠ Decisão final pendente</span>
+    </div>
+  </div>
+
+  <div class="card prio-med">
+    <div class="card-title">Participação do EB — 4ª DE / Belo Horizonte</div>
+    <div class="card-date">23 ABR 2026</div>
+    <div class="card-body">
+      Confirmada participação da 4ª Divisão de Exército (BH) em Furnas. O CEM mapeou os quartéis do EB nas proximidades: <strong>Escola de Sargentos das Armas — Três Corações (~120 km)</strong> é o mais próximo. Demais: Pouso Alegre (~160 km), Itajubá (~200 km), São João del-Rei (~230 km), BH (~300 km) e Juiz de Fora (~350 km). Acompanhar publicações das OM do EB envolvidas na faina para busca de informações.
+    </div>
+    <div class="tags"><span class="tag t-ok">Mapeamento concluído</span></div>
+  </div>
+
+  <div class="card prio-med">
+    <div class="card-title">Recursos necessários — almoço com VAlte Zampieri e CAlte Cândido Marques</div>
+    <div class="card-date">21 ABR 2026</div>
+    <div class="card-body">
+      O ComFFE determinou que cada Divisão levasse ao almoço com os dois almirantes todas as demandas de apoio para Furnas e Formosa. Escopo: munição, mísseis, antenas de internet, repetidoras.
+    </div>
+    <div class="tags">
+      <span class="tag t-ok">✓ Realizado em 22 ABR</span>
+    </div>
+  </div>
+
+  <div class="card prio-med">
+    <div class="card-title">Reunião de Coordenação — transferida para DivAnf</div>
+    <div class="card-date">03 MAI 2026</div>
+    <div class="card-body">
+      Reunião de Coordenação da FFE transferida do auditório da FFE para o <strong>auditório da DivAnf</strong>, com presença de <strong>todos os Cmtes de OM</strong>. Motivação: concentração das atividades com a visita do COMAE (Barbacovi) ao BtlCmbAe às 14h. Sem óbices.
+    </div>
+    <div class="tags"><span class="tag t-ok">✓ Aprovado — auditório DivAnf</span></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ EXERCÍCIO FORMOSA ═══ -->
+
+<div class="sec" id="formosa">
+  <div class="sec-hdr">
+    <div class="sec-ico">💣</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 04 — Operações</span>
+      <div class="sec-title">Exercício Formosa</div>
+      <div class="sec-subtitle">Previsto em sequência a Furnas — problema crítico de munição identificado</div>
+    </div>
+  </div>
+
+  <div class="card prio-high">
+    <div class="card-title">Munição de Morteiro 81mm — lote reprovado</div>
+    <div class="card-body">
+      Lote de granadas de Morteiro 81mm com cerca de <strong>200 unidades reprovadas (nega)</strong>: 20 de 30 testadas reprovaram — lote fora de uso. Impacto direto sobre Formosa. <strong>Aquisição adicional obrigatória</strong>. Levantamento em andamento com F-40.
+    </div>
+    <div class="tags">
+      <span class="tag t-alert">🔴 Aquisição obrigatória</span>
+      <span class="tag t-resp">Resp: CMatFN / F-40</span>
+      <span class="tag t-prazo">Prazo: antes de Formosa</span>
+    </div>
+  </div>
+
+  <div class="card prio-high">
+    <div class="card-title">Munição de Morteiro 60mm — revalidação</div>
+    <div class="card-body">
+      Revalidação de <strong>10 meses</strong> solicitada pelo ComFFE. O CEM foi orientado a tratar com Cappucci (determinado em 29 ABR). Acompanhar evolução.
+    </div>
+    <div class="tags">
+      <span class="tag t-resp">Resp: CEM / Cappucci</span>
+      <span class="tag t-alert">⚠ Determinado 29 ABR — verificar cumprimento</span>
+    </div>
+  </div>
+
+  <div class="card prio-high">
+    <div class="card-title">Levantamento geral de munição — reajuste de 20%</div>
+    <div class="card-body">
+      O ComFFE considerou o levantamento inicial <strong>subestimado</strong>. Determinou que seja refeito acrescendo <strong>20% em cada tipo de munição</strong>, com ações urgentes junto ao ComOpNav-20.
+    </div>
+    <div class="tags">
+      <span class="tag t-alert">🔴 URGENTE — antes de Furnas e Formosa</span>
+      <span class="tag t-resp">Resp: CEM / F-40</span>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ OP. JEANNE D'ARC ═══ -->
+
+<div class="sec" id="jda">
+  <div class="sec-hdr">
+    <div class="sec-ico">⚓</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 05 — Operações</span>
+      <div class="sec-title">Operação Jeanne D'Arc</div>
+      <div class="sec-subtitle">Exercício com forças francesas — concluído com êxito em abril/2026</div>
+    </div>
+  </div>
+
+  <div class="card prio-low">
+    <div class="card-title">Designação de meios — Sabóia e EDCG Marambaia</div>
+    <div class="card-date">17 ABR 2026</div>
+    <div class="card-body">
+      O ComGer (Cambra) definiu o emprego do <strong>Sabóia e da EDCG Marambaia</strong> para a Operação. ALTCRED de R$ 25.000 tramitada do CGCFN para a DivLit (transporte da EdLit para Marambaia). CEM fechou com Almirante De Luca a importância da EDCG Marambaia. Videoconferência realizada com Almirante Eugênio Huguenin para apresentação de necessidades de recursos e munições.
+    </div>
+    <div class="tags"><span class="tag t-ok">✓ Definido e executado</span></div>
+  </div>
+
+  <div class="card prio-med">
+    <div class="card-title">Oficial superior para coordenação — Escola Naval</div>
+    <div class="card-date">07–08 ABR 2026</div>
+    <div class="card-body">
+      O ComFFE determinou designação de oficial <strong>mais antigo</strong> para tratar com GCM e Escola Naval — coordenações complexas. Proposta inicial (CF Carlos Pimentel) substituída por <strong>CMG Luiz Felipe</strong>, que assumiu o evento nos dias 8 e 9 ABR. Faina da Escola Naval confirmada pelo 50 do GCM.
+    </div>
+    <div class="tags"><span class="tag t-ok">✓ CMG Luiz Felipe escalado</span></div>
+  </div>
+
+  <div class="card prio-low">
+    <div class="card-title">Resultado — Operação Jeanne D'Arc</div>
+    <div class="card-date">28 ABR 2026</div>
+    <div class="card-body">
+      O ComFFE parabenizou todos os envolvidos: franceses ficaram muito satisfeitos, fortalecimento dos laços com a França, superando expectativas. 25 Oficiais de toda FFE escalados para palestra subsequente no Clube Naval (Lars Grael, 29 ABR). Pedido dos franceses de acréscimo de atividades nos dias 24, 27 e 28 foi formalizado com satisfação ao CON.
+    </div>
+    <div class="tags"><span class="tag t-ok">✓ CONCLUÍDA COM ÊXITO — Superou expectativas</span></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ AAV ═══ -->
+
+<div class="sec" id="aav">
+  <div class="sec-hdr">
+    <div class="sec-ico">🇺🇳</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 06 — Prontidão</span>
+      <div class="sec-title">AAV — Avaliação de Capacidade e Verificação (ONU)</div>
+      <div class="sec-subtitle">Evento crítico — 27 MAI 2026 — Inspetores predominantemente europeus/nórdicos</div>
+    </div>
+  </div>
+
+  <div class="hbox" style="border-color: var(--red);">
+    <strong>⚠ ATENÇÃO REDOBRADA:</strong> O ComFFE alertou que, exceto Bangladesh, todos os inspetores são europeus/nórdicos — historicamente mais inflexíveis. A preparação deve ser rigorosa em todos os aspectos.
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Composição da equipe de inspetores da ONU</div>
+    <div class="tbl-wrap">
+      <table class="rtbl">
+        <thead><tr><th>Função</th><th>Nome</th><th>Origem / Organização</th></tr></thead>
+        <tbody>
+          <tr><td>Chefe de Equipe</td><td>Mr. Oliver Ulich</td><td>Alemanha — DPET / Dept. de Operações de Paz (ONU)</td></tr>
+          <tr><td>Esp. Minas e Explosivos (EOD)</td><td>Mr. Michael Joergensen</td><td>Dinamarca — UNMAS / TMAT</td></tr>
+          <tr><td>Especialista em COE</td><td>Natalia Golovinova</td><td>Rússia — MOU e Reimbursement Policy Section</td></tr>
+          <tr><td>Esp. Geração de Força</td><td>Mr. Mohib-Al Mahmud</td><td>Bangladesh — Military Force Generation Section</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Cronograma previsto</div>
+    <div class="tbl-wrap">
+      <table class="rtbl">
+        <thead><tr><th>Data</th><th>Evento</th><th>Observações</th></tr></thead>
+        <tbody>
+          <tr><td>18 MAI</td><td>Abertura e AAV no EB</td><td>Gen Div Julio Cesar Palú Baltier (Sub-Chefe de Op. Internacionais) prevê participação.</td></tr>
+          <tr><td>22 MAI</td><td>AAV na Cia EOD do EB</td><td>Monitorar interações do Gen Baltier com os inspetores.</td></tr>
+          <tr><td>27 MAI</td><td><strong>AAV na MB (FFE)</strong></td><td><span class="pill p-red">Data principal — atenção máxima</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Pendências e ações da AAV</div>
+    <div class="tbl-wrap">
+      <table class="rtbl">
+        <thead><tr><th>#</th><th>Ação / Pendência</th><th>Status</th><th>Responsável</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Organização completa da comissão de recepção (documento V_171200ABR — 29 pág. enviadas)</td><td><span class="pill p-amber">Em andamento</span></td><td>CEM / Lopes</td></tr>
+          <tr><td>2</td><td>Armários (ND 52): prioridade reduzida — recursos direcionados ao C2</td><td><span class="pill p-grey">Deprioritizado</span></td><td>—</td></tr>
+          <tr><td>3</td><td>Interferidores (Jammers) — ver Seção 07</td><td><span class="pill p-red">Crítico</span></td><td>CMatFN / CEM</td></tr>
+          <tr><td>4</td><td>Geradores: todas as linhas ligadas antes dos geradores alugados</td><td><span class="pill p-amber">CEM comprometido</span></td><td>F-40 / CEM</td></tr>
+          <tr><td>5</td><td>ALTCRED R$ 25.000 do CGCFN para DivLit (transporte EdLit)</td><td><span class="pill p-green">✓ Tramitado</span></td><td>CGCFN / DivLit</td></tr>
+          <tr><td>6</td><td>Participação Gen Div Julio Baltier — monitorar interações com inspetores</td><td><span class="pill p-amber">Em atenção</span></td><td>ComFFE / CEM</td></tr>
+          <tr><td>7</td><td>Sem helicóptero francês com tropa brasileira na AAV</td><td><span class="pill p-green">✓ Definido</span></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card prio-info">
+    <div class="card-title">Participação em Foz do Iguaçu — diárias e recursos</div>
+    <div class="card-body">
+      <ul>
+        <li><strong>Almirantes Lemos, Campos Mello e Costa Reis</strong>: receberão diárias normalmente.</li>
+        <li><strong>Demais oficiais (inclusive CEM)</strong>: receberão IND REP VI e Alimentação — escassez de recursos.</li>
+        <li><strong>Passagens</strong>: R$ 20.000 obtidos junto ao 9DN. CEM retornou de Ágata com voo da FAB, liberando crédito para Foz.</li>
+      </ul>
+    </div>
+    <div class="tags"><span class="tag t-ok">Passagens resolvidas</span><span class="tag t-alert">⚠ Recursos de diárias limitados</span></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ JAMMERS / NBQR ═══ -->
+
+<div class="sec" id="jammers">
+  <div class="sec-hdr">
+    <div class="sec-ico">📡</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 07 — Prontidão</span>
+      <div class="sec-title">Interferidores (Jammers) para a AAV</div>
+      <div class="sec-subtitle">Solução física obrigatória — não existe opção de "incluir em plano de aquisição"</div>
+    </div>
+  </div>
+
+  <div class="hbox" style="border-color: var(--red);">
+    <strong>Diretriz do ComFFE:</strong> "Não existe a opção de <em>não apresentar e incluir em plano de aquisição</em>." Solução física é obrigatória antes de 27 MAI. Despacho do CMatFN com o ComFFE pendente para apresentar solução completa.
+  </div>
+
+  <div class="card prio-high">
+    <div class="card-title">Situação atual dos interferidores</div>
+    <div class="card-body">
+      <strong>Problema identificado:</strong> jammers da Receita Federal presentes no sistema bloqueiam apenas sinal Bluetooth — não atendem ao requisito da AAV. O modelo registrado é diferente.
+    </div>
+    <div class="tbl-wrap" style="margin-top:12px;">
+      <table class="rtbl">
+        <thead><tr><th>Item</th><th>Qtd</th><th>Situação</th><th>Localização</th></tr></thead>
+        <tbody>
+          <tr><td>Interferidores emprestados de Órgão Seg. Pública</td><td>3</td><td><span class="pill p-green">Funcionando</span></td><td>Em posse do CMatFN</td></tr>
+          <tr><td>Interferidor portátil</td><td>1</td><td><span class="pill p-green">OK</span></td><td>BtlEngFuzNav (Cia QRF)</td></tr>
+          <tr><td>Interferidores veiculares (UNIMOG DAE + 1 não montado)</td><td>2</td><td><span class="pill p-amber">Parcial</span></td><td>BtlEngFuzNav (Cia QRF)</td></tr>
+          <tr><td>Unidades em estudo pelo CTecCFN</td><td>2</td><td><span class="pill p-amber">Possível confecção</span></td><td>CTecCFN</td></tr>
+          <tr><td>EB — apresentação</td><td>—</td><td><span class="pill p-grey">Apenas plano de aquisição</span></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tags">
+      <span class="tag t-alert">🔴 Buscar unidades adicionais via OSP (MG / DF / SP / SC)</span>
+      <span class="tag t-resp">Resp: CMatFN (Alte Medeiros) + CEM + Costa Reis</span>
+      <span class="tag t-prazo">Prazo: antes de 27 MAI</span>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ USS NIMITZ ═══ -->
+
+<div class="sec" id="nimitz">
+  <div class="sec-hdr">
+    <div class="sec-ico">☢</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 08 — Prontidão</span>
+      <div class="sec-title">Visita do USS Nimitz — Proteção NBQR</div>
+      <div class="sec-subtitle">Porta-aviões nuclear USS Nimitz (CVN-68) e DDG Gridley — Operação Southern Seas 2026</div>
+    </div>
+  </div>
+
+  <div class="card prio-low">
+    <div class="card-title">Coordenação e Conceito de Manobra NBQR</div>
+    <div class="card-date">01–04 MAI 2026</div>
+    <div class="card-body">
+      O 1DN expediu MSG (R-161712Z/ABR) com demandas para participação da FFE em ações NBQR. O CEM identificou descoordenação inicial na DivLit e tomou ação corretiva.
+      <br><br><strong>Conceito definido:</strong> CProtDefNBQRM lidera as ações NBQR com apoio de tropas da FFE (estrutura semelhante a ARAMAR). MSG autorizada pelo ComFFE (01 MAI) e expedida em 04 MAI (R041317Z/MAI/2026).
+      <br><br><strong>POC indicados ao PRIDIS:</strong>
+      <ul>
+        <li><strong>BtlEngFuzNav</strong> — varreduras de explosivos</li>
+        <li><strong>2ºBtlProtDefNBQ</strong> — atividades de radioproteção</li>
+        <li><strong>BtlCmbAe</strong> — emprego de Equipe Antidrone</li>
+      </ul>
+    </div>
+    <div class="tags">
+      <span class="tag t-ok">✓ MSG expedida — POC indicados</span>
+      <span class="tag t-resp">Resp: DivLit / CAlte Cmttrref</span>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ LIDERANÇA ═══ -->
+
+<div class="sec" id="lideranca">
+  <div class="sec-hdr">
+    <div class="sec-ico">🎖</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 09 — Prontidão</span>
+      <div class="sec-title">Liderança, Motivação e Prontidão Operacional</div>
+    </div>
+  </div>
+
+  <div class="card prio-low">
+    <div class="card-title">Divulgação interna de conteúdos sobre liderança</div>
+    <div class="card-date">04 ABR 2026</div>
+    <div class="card-body">
+      O ComFFE compartilhou carta e vídeo (Instagram — Pavoni) sobre liderança e prontidão. Conteúdos considerados plenamente pertinentes à FFE. Determinou divulgação interna pelos Comandantes de OM. Ênfase: <strong>"Liderança independe de recursos orçamentários."</strong> Manter a prontidão não é apenas questão material, mas sobretudo de liderança e motivação do pessoal.
+    </div>
+    <div class="tags">
+      <span class="tag t-ok">✓ Divulgado — confirmado pelos Almirantes</span>
+      <span class="tag t-resp">Resp: Todos os Cmtes de OM</span>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ FINANCEIRO ═══ -->
+
+<div class="sec" id="financeiro">
+  <div class="sec-hdr">
+    <div class="sec-ico">💰</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 10 — Gestão</span>
+      <div class="sec-title">Gestão de Recursos Financeiros</div>
+      <div class="sec-subtitle">Múltiplas frentes de captação e prioridade absoluta em Furnas/Formosa</div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">10.1 — Empenho urgente de saldos (alerta do CON)</div>
+    <div class="card prio-high">
+      <div class="card-title">Saldos elevados obstam novos recursos — Furnas em risco</div>
+      <div class="card-date">30 ABR 2026</div>
+      <div class="card-body">
+        O CON (AE Vasquez) alertou que os elevados saldos disponíveis estão <strong>impedindo o recebimento de novos recursos</strong> pelo COMOPNAV. Recursos disponíveis estão sujeitos a <strong>recolhimento imediato</strong>. O ComFFE determinou ao Alte Adauto empenho celere nas OM abaixo:
+      </div>
+      <div class="tbl-wrap" style="margin-top:12px;">
+        <table class="rtbl">
+          <thead><tr><th>OM</th><th>Orçamentário</th><th>Destaque de Crédito</th><th>Emenda Parlamentar</th></tr></thead>
+          <tbody>
+            <tr><td><strong>BtlOpEsp</strong></td><td>R$ 161.981,26</td><td>R$ 129.400,01</td><td>R$ 900.000,00</td></tr>
+            <tr><td><strong>BFNRM</strong></td><td>R$ 680.951,77</td><td>R$ 84.999,04</td><td>—</td></tr>
+            <tr><td><strong>BtlCmbAe</strong></td><td>R$ 153.542,82</td><td>R$ 36.272,50</td><td>—</td></tr>
+            <tr><td><strong>ComDivRib</strong></td><td>R$ 14.203,15</td><td>—</td><td>—</td></tr>
+          </tbody>
+          <tfoot><tr><td>TOTAL (OM críticas)</td><td>R$ 1.010.679,00</td><td>R$ 250.671,55</td><td>R$ 900.000,00</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="tags">
+        <span class="tag t-resp">Resp: CEM — Alte Adauto</span>
+        <span class="tag t-alert">🔴 URGENTE — risco de recolhimento pelo COMOPNAV</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">10.2 — Recursos para Furnas / Formosa</div>
+    <div class="tbl-wrap">
+      <table class="rtbl">
+        <thead><tr><th>Fonte</th><th>Valor (R$)</th><th>Status / Prazo</th></tr></thead>
+        <tbody>
+          <tr><td>PAG-CON (previsto)</td><td>550.000</td><td><span class="pill p-blue">Previsto — não abater</span></td></tr>
+          <tr><td>DOR do MD (3 DORs)</td><td>≈ 415.000</td><td><span class="pill p-amber">Aprovação prevista 15 MAI; descentralização em JUN</span></td></tr>
+          <tr><td>Almirante Góis (EMA-20)</td><td>250.000 (+100k extra se conseguir)</td><td><span class="pill p-amber">Acordado — chega JUN; restrição de aplicação (não direto em operações)</span></td></tr>
+          <tr><td>Almirante Eugênio (DGOM)</td><td>A determinar</td><td><span class="pill p-amber">MSG enviada; previsão FFE até terça (semana 11 MAI)</span></td></tr>
+          <tr><td>8ºDN (para EdLit)</td><td>115.000</td><td><span class="pill p-amber">Em avaliação — possível redirecionamento + carretas</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hbox" style="margin-top:14px;">
+      <strong>Estratégia financeira definida (08 MAI):</strong> Os R$ 250.000 do Almirante Góis chegam em junho com restrição de aplicação em exercícios → irão para o ComOpNav. Em contrapartida, o Almirante Eugênio descentraliza o equivalente para a FFE em rubrica de Manobra e Exercício (<em>"engenharia financeira"</em>).
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">10.3 — Recursos para Ágata Norte (9DN)</div>
+    <div class="tbl-wrap">
+      <table class="rtbl">
+        <thead><tr><th>Item</th><th>Solicitado (R$)</th><th>Recebido (R$)</th><th>Observação</th></tr></thead>
+        <tbody>
+          <tr><td>Diárias — DivRib</td><td>48.000</td><td>0</td><td><span class="pill p-red">Não atendido</span></td></tr>
+          <tr><td>Material para PC — Tonelero</td><td>60.000</td><td>0</td><td><span class="pill p-red">Não atendido</span></td></tr>
+          <tr><td>Equipagem operativa — Tonelero</td><td>145.000</td><td>0</td><td><span class="pill p-red">Não atendido</span></td></tr>
+          <tr><td>ComBAe</td><td>Conforme pedido</td><td>Integral</td><td><span class="pill p-green">✓ Atendido</span></td></tr>
+          <tr><td>GRUMEC</td><td>59.100</td><td>59.100</td><td>Direcionado ao COMEMCH</td></tr>
+        </tbody>
+        <tfoot><tr><td>TOTAL FFE (DivRib, ComBAe, Tonelero)</td><td>443.702</td><td>190.900</td><td>Déficit: R$ 253.802</td></tr></tfoot>
+      </table>
+    </div>
+    <div style="font-size:0.9rem; color:var(--text-soft); margin-top:10px;">
+      <strong>Distribuição dos R$ 190.900 recebidos:</strong> DivRib R$ 14.200 | Tonelero R$ 106.000 | ComBAe R$ 12.400 | Reserva FFE R$ 58.300 (R$ 23.300 emergencial + R$ 35.000 passagens). ComFFE solicitou revisão: aumentar ComBAe (projeto Enxame de Drone — R$ 40.000 prometidos) com ajuste no Tonelero.
+    </div>
+  </div>
+
+  <div class="card prio-info">
+    <div class="card-title">Pedido indevido de rancho (R$ 980) ao ComOpNav — resolvido</div>
+    <div class="card-body">
+      Cmte da BFNIG → EM DivAnf → caixa do CF FN Adelton (F-30) → MSG chegou ao EMA via ComOpNav, gerando repercussão indesejada. O Alte Adauto tratou diretamente com Alte Leonardo Lima (EMA-60) — item excluído. F-30 responsabilizado pela falha.
+      <br><br><strong>Determinação ComFFE:</strong> CEM deve informar aos CEM das Forças Subordinadas para evitar pedidos de pequena monta ao ComOpNav.
+    </div>
+    <div class="tags"><span class="tag t-ok">✓ Resolvido</span><span class="tag t-alert">⚠ Circular preventiva a emitir</span></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ LOGÍSTICA ═══ -->
+
+<div class="sec" id="logistica">
+  <div class="sec-hdr">
+    <div class="sec-ico">🚛</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 11 — Gestão</span>
+      <div class="sec-title">Infraestrutura, Logística e Material</div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">DOR do COC — Centro de Operações e Comando</div>
+    <div class="card prio-high">
+      <div class="card-title">3 DORs do MD aguardando assinatura — obra do COC travada</div>
+      <div class="card-body">
+        Prazo IAM em risco. CEM buscando outros canais no MD para acelerar. <strong>Próximo passo:</strong> apresentação de slides na SC-1 (MD) na sexta-feira da semana de 05 MAI. CMG (EN) da Costa é o interlocutor; Brigadeiro (01) estava em Londres com retorno na segunda-feira.
+      </div>
+      <div class="tags">
+        <span class="tag t-resp">Resp: CEM / F-40 / CMatFN</span>
+        <span class="tag t-alert">⚠ Prazo IAM em risco</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Viaturas UNIMOG — Entrega dos novos U5000</div>
+    <div class="card prio-low">
+      <div class="card-title">Status de entrega dos novos UNIMOG U5000</div>
+      <div class="card-date">08 MAI 2026</div>
+      <div class="card-body">
+        <strong>Entregues (novas aquisições):</strong>
+        <ul>
+          <li>BtlLogFuzNav: 10 viaturas</li>
+          <li>BtlEngFuzNav: 3 viaturas</li>
+          <li>BtlCmbAe: 1 viatura</li>
+          <li>BtlCmdoCt: 1 viatura</li>
+          <li><strong>Total entregue: 15 VTR</strong></li>
+        </ul>
+        <br><strong>Processo em andamento:</strong> 4 VTR TE (CIST A, CIST C, FRIG, BASC) + 1 VTR TNE entregues anteriormente. 6 VTR TNE aguardando retirada (MSG expedida). 4 VTR TNE em matrização no CTecCFN/CeIMPL.
+      </div>
+      <div class="tags">
+        <span class="tag t-ok">✓ 15 VTR entregues em 08 MAI</span>
+        <span class="tag t-alert">⚠ 6 VTR TNE aguardando retirada pelas OM</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">UFEx — Unidade Fabril Expedicionária / Unimog SIC2MB</div>
+    <div class="card prio-med">
+      <div class="card-title">Solicitação de cessão de 3 Vtr Unimog U5000 ao CTecCFN — legado SIC2MB</div>
+      <div class="card-date">25 ABR 2026</div>
+      <div class="card-body">
+        O CMatFN (Medeiros) solicitou cessão de 3 Vtr Unimog U5000 (com shelter — legado SIC2MB) ao CTecCFN para a UFEx (impressão 3D / manufatura aditiva em campanha). 
+        <br><br><strong>Complicação:</strong> As 3 Vtr já estão sendo operadas pelo BtlCmdoCt em capacidade de GE (monitoramento de 500 KHz a 1,7 GHz, testes Elbit). O BtlCmdoCt também possui 1 Vtr de comunicações, 1 Vtr MAE e expansão em curso. <strong>Alternativa identificada:</strong> 4ª Vtr Unimog U5000 sem shelter — pode ser configurada para qualquer plataforma.
+      </div>
+      <div class="tags">
+        <span class="tag t-resp">Resp: ComFFE / CEM / ComDivAnf</span>
+        <span class="tag t-alert">⚠ Decisão pendente: ceder ou propor alternativa</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Aeronaves — ForAerNav</div>
+    <div class="card prio-info">
+      <div class="card-title">Maior rigor nos pedidos de aeronaves à ForAerNav</div>
+      <div class="card-date">17–19 ABR 2026</div>
+      <div class="card-body">
+        O ComFFE determinou maior rigor a partir de 17 ABR nos pedidos à ForAerNav. CEM coordenou com Aristone (já ciente). Pedido dos franceses de acréscimo de atividades (dias 24, 27 e 28) formalizado para dar satisfação ao CON.
+      </div>
+      <div class="tags"><span class="tag t-ok">✓ Critérios alinhados com Aristone</span></div>
+    </div>
+  </div>
+
+  <div class="subsec">
+    <div class="subsec-title">Meios — Balsa da Vale / Marambaia</div>
+    <div class="card prio-low">
+      <div class="card-title">Posicionamento de meios na Marambaia</div>
+      <div class="card-date">04 ABR 2026</div>
+      <div class="card-body">
+        Meios previstos na Balsa da Vale posicionados na Marambaia conforme determinação. Confirmação com fotos recebida pelo CEM.
+      </div>
+      <div class="tags"><span class="tag t-ok">✓ Concluído</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ AEROPORTO FURNAS ═══ -->
+
+<div class="sec" id="aeroporto">
+  <div class="sec-hdr">
+    <div class="sec-ico">✈</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 12 — Gestão</span>
+      <div class="sec-title">Aeroporto de Furnas — Contrato de Doação</div>
+      <div class="sec-subtitle">Processo de obtenção do uso do Aeroporto de Furnas para a MB</div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="rtbl">
+      <thead><tr><th>Frente de Trabalho</th><th>Situação</th></tr></thead>
+      <tbody>
+        <tr><td>Protocolo de Intenções</td><td>Retificado a pedido de Bruno Eustáquio. Aprovado pelo Conselho Diretor da AXIA. Novo Pres. da ALAGO (Prefeito de Alfenas — Fábio Marques Florêncio) incluído. <span class="pill p-green">✓ Assinado</span></td></tr>
+        <tr><td>Município São José da Barra</td><td>Excluído do Contrato de Doação (pedido da AXIA). Celebrado instrumento específico de CDRU (Concessão de Direito Real de Uso) entre União e Município.</td></tr>
+        <tr><td>Laudos de avaliação</td><td>Engenheiro civil concluiu os laudos. <span class="pill p-amber">Enviados para homologação</span></td></tr>
+        <tr><td>Reunião SPU-MG</td><td>Agendada com Sra. Lohany (superintendente) para 23 ABR. Cmt Marcos Matta convidado. Objetivo: coincidir assinatura com o exercício em Furnas. <span class="pill p-amber">Realizada — aguardar resultado</span></td></tr>
+        <tr><td>Contratos (Doação AXIA/MB e CDRU)</td><td><span class="pill p-amber">Em confecção e aprovação</span></td></tr>
+        <tr><td>PROFAA — Programa Federal de Auxílio a Aeroportos</td><td>Pesquisado pelo ComFFE (07 MAI): gerido pelo Ministério de Portos e Aeroportos / FNAC (Fundo Nacional de Aviação Civil), pela SAC. <span class="pill p-blue">Relevante para as tratativas</span></td></tr>
+        <tr><td>Projeto TCE-MG — reformas de aeroportos</td><td><span class="pill p-amber">Pendente</span> — CAlte FN Adauto com CMG Aderne</td></tr>
+        <tr><td>Projeto Secretaria Portos e Aeroportos</td><td><span class="pill p-amber">Pendente</span> — CAlte FN Adauto e CMG FN Marcos Matta</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ PESSOAL ═══ -->
+
+<div class="sec" id="pessoal">
+  <div class="sec-hdr">
+    <div class="sec-ico">👤</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 13 — Pessoal</span>
+      <div class="sec-title">Pessoal e Distribuição de Oficiais</div>
+    </div>
+  </div>
+
+  <div class="card prio-med">
+    <div class="card-title">Proposta de distribuição de Oficiais EM — Pré-Leilão 2026</div>
+    <div class="card-date">07–08 ABR 2026</div>
+    <div class="card-body">
+      Relação de Oficiais para RAT/RET distribuída para avaliação. Critérios do ComFFE:
+      <ul>
+        <li>Distribuição equilibrada e proporcional às fainas previstas;</li>
+        <li>CC FN em estudo para CEMOS: max. 1 por seção das 4 Forças;</li>
+        <li>CC FN priorizados nos Comandos de Força; CT FN nos Batalhões;</li>
+        <li>Evitar Oficiais Intermediários nas Divisões.</li>
+      </ul>
+    </div>
+    <div class="tags">
+      <span class="tag t-resp">Resp: CEM — Alte Adauto</span>
+      <span class="tag t-ok">Divulgado — ajustes possíveis após reunião CPesFN</span>
+    </div>
+  </div>
+
+  <div class="card prio-high">
+    <div class="card-title">Militares extra-FFE em Furnas — incidente e solução</div>
+    <div class="card-date">30 ABR 2026</div>
+    <div class="card-body">
+      Militares de fora da FFE participaram de processo seletivo interno sem autorização clara (CEFAN, BFNRM, BtlArtFuzNav, BtlLogFuzNav, 2ºBtlInfFuzNav). Mais antigo do destacamento não era da FFE — falha do F-10 (CF Pimentel), que consolidou a relação sem observar a OM de origem.
+      <br><br><strong>Solução:</strong> 5 militares regressaram de Furnas. BtlCombAe substituiu com SO próprio como mais antigo. CEM falou com Dirlei (autorização formalizada por MSG com AFI da FFE).
+    </div>
+    <div class="tags">
+      <span class="tag t-ok">✓ Resolvido</span>
+      <span class="tag t-alert">⚠ MSG determinando submissão de escalações ao ComFFE a emitir</span>
+      <span class="tag t-resp">F-10 (CF Pimentel) responsabilizado</span>
+    </div>
+  </div>
+
+  <div class="card prio-info">
+    <div class="card-title">CF FN Vitor — situação pessoal (tratamento reservado)</div>
+    <div class="card-date">23 ABR 2026</div>
+    <div class="card-body">
+      Esposa do CF FN Vitor (intencionado ao Comando do BtlOpRib) diagnosticada com câncer com suspeita de metástase. Possui filho especial. Situação pode impossibilitar o comando. CF Vitor não divulgou o assunto.
+    </div>
+    <div class="tags">
+      <span class="tag t-alert">⚠ Acompanhar reservadamente — possível impacto no BtlOpRib</span>
+      <span class="tag t-resp">Resp: ComFFE (reservado)</span>
+    </div>
+  </div>
+
+  <div class="card prio-info">
+    <div class="card-title">Viagem do CC FN Rocco à África do Sul</div>
+    <div class="card-date">02 ABR 2026</div>
+    <div class="card-body">
+      Portaria de viagem assinada e expedida pelo Alte Adauto em 02 ABR (no impedimento do ComFFE). Período: 22 ABR a 10 MAI. Retorno à FFE previsto para 11 MAI para providências finais da AAV.
+    </div>
+    <div class="tags"><span class="tag t-ok">✓ Concluído</span></div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ CERIMONIAL ═══ -->
+
+<div class="sec" id="cerimonial">
+  <div class="sec-hdr">
+    <div class="sec-ico">📅</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Seção 14 — Agenda</span>
+      <div class="sec-title">Eventos, Cerimonial e Coordenações Institucionais</div>
+    </div>
+  </div>
+
+  <div class="card prio-med">
+    <div class="card-title">Escola Naval — Cerimônia em 11 JUN 2026</div>
+    <div class="card-date">24 ABR 2026</div>
+    <div class="card-body">
+      FFE formará à retaguarda de cerca de 500 militares (repetição do ocorrido em 13 DEZ 2025). <strong>Determinação:</strong> acionar CF Carlos Pimentel para repetir procedimentos de preparação, apresentação pessoal e garantir que nenhum militar caia em formatura.
+    </div>
+    <div class="tags">
+      <span class="tag t-resp">Resp: CEM / CF Carlos Pimentel</span>
+      <span class="tag t-prazo">Prazo: até 11 JUN 2026</span>
+    </div>
+  </div>
+
+  <div class="card prio-med">
+    <div class="card-title">Cerimônia de recepção ao Presidente da República (09 ABR)</div>
+    <div class="card-date">09 ABR 2026</div>
+    <div class="card-body">
+      Tropa da FFE formada junto com Aspirantes da EN para recepção ao PresRep. <strong>Determinação ComFFE:</strong> CMG à frente do destacamento (preferencialmente Cmte de BtlInfFuzNav). Coordenação com EN. Inspeção de material (armamento, capacete). <em>Lição aprendida: não subestimar a faina.</em> ComFFE preferiu concentrar em batalhão de infantaria com seu Comandante.
+    </div>
+    <div class="tags"><span class="tag t-ok">✓ Executado</span><span class="tag t-info">Lição aprendida registrada</span></div>
+  </div>
+
+  <div class="card prio-med">
+    <div class="card-title">Visita do COMAE ao BtlCmbAe — Brigadeiro Barbacovi</div>
+    <div class="card-date">05 MAI 2026</div>
+    <div class="card-body">
+      Brigadeiro Barbacovi (4 estrelas / COMAE) visitou oficialmente o BtlCmbAe. CEM determinou que o Cmte do ComBAe despachasse o tema com o ComFFE antes da visita. MSG do ComFFE coordenando o evento foi expedida (envolve entrada no Complexo da DivAnf). Brigadeiro informou que entraria em contato com Alte Carlos Chagas.
+    </div>
+    <div class="tags"><span class="tag t-ok">✓ Realizado</span></div>
+  </div>
+
+  <div class="card prio-low">
+    <div class="card-title">Palestras no Clube Naval</div>
+    <div class="card-date">29–30 ABR 2026</div>
+    <div class="card-body">
+      <ul>
+        <li><strong>Lars Grael</strong> — 29 ABR, 14:30h: 25 Oficiais de toda FFE escalados. <span style="color:var(--green);font-weight:700;">✓ Realizada.</span></li>
+        <li><strong>Secretário de Segurança Pública-RJ</strong> — 30 ABR, 11:00h: <span style="color:var(--red);font-weight:700;">Cancelada</span> (28 ABR). Conflito com passagem da DAbM e despedida do Alte Olavo.</li>
+      </ul>
+    </div>
+    <div class="tags"><span class="tag t-ok">Lars Grael ✓</span><span class="tag t-info">Sec. Seg. Pública: cancelada</span></div>
+  </div>
+
+  <div class="card prio-low">
+    <div class="card-title">ZOPACAS — Possível participação do Presidente Lula</div>
+    <div class="card-date">06 ABR 2026</div>
+    <div class="card-body">
+      Possibilidade de participação do Presidente Lula no encerramento do Evento da ZOPACAS (09 ABR). Confirmado com Alte Góis — possibilidade, sem confirmação final. Alerta: caso compareça, haverá solicitação de representação e mostruário da FFE. Acompanhamento necessário.
+    </div>
+    <div class="tags"><span class="tag t-info">Monitorar acompanhamento</span></div>
+  </div>
+
+  <div class="card prio-low">
+    <div class="card-title">Determinações de Liderança e Motivação — CGCFN (06 MAI)</div>
+    <div class="card-date">07 MAI 2026</div>
+    <div class="card-body">
+      O ComFFE compilou os pontos do ComGer (reunião CGCFN) e distribuiu responsabilidades:
+      <div class="tbl-wrap" style="margin-top:10px;">
+        <table class="rtbl">
+          <thead><tr><th>Ação</th><th>Responsável</th><th>Status (08 MAI)</th></tr></thead>
+          <tbody>
+            <tr><td>Verificar compra de antidrones DGNUC — entrega antes de Furnas/Formosa</td><td>CAlte FN Adauto</td><td><span class="pill p-amber">Aguardando</span></td></tr>
+            <tr><td>Envio de Pel CFN para Op. MARÉ APERTO (Itália, out/26) — núcleo: 3BtlInfFuzNav</td><td>CAlte FN Campos Mello</td><td><span class="pill p-amber">Em análise</span></td></tr>
+            <tr><td>Montar Blindagem Suplementar no CLANF</td><td>CAlte FN Costa Reis</td><td><span class="pill p-blue">Incluído no Adest interno BtlVtrAnf</span></td></tr>
+            <tr><td>Projeto BNDES Fundo Amazônia — continuidade</td><td>Cappucci / Milton</td><td><span class="pill p-grey">Aguardando</span></td></tr>
+            <tr><td>BNDES Rio Doce — Furnas/Itaoca; adequar FRIDA</td><td>CAlte FN Costa Reis</td><td><span class="pill p-blue">Reunião CGCFN-20 agendada</span></td></tr>
+            <tr><td>Pelotões Velocidade e Vibração — inscrição Corrida CFN</td><td>CAlte Campos Mello / Costa Reis</td><td><span class="pill p-amber">ComDivAnf, BFNIG, 2Btl, BtlCmdoCt inscritos; 1Btl, 3Btl e BtlArt até 11 MAI</span></td></tr>
+            <tr><td>Campeonato Área Rio — 1º semestre</td><td>F-30 / G-30 DivLit</td><td><span class="pill p-blue">4º lugar (7 participantes); 2 de 10 modalidades disputadas</span></td></tr>
+            <tr><td>Solicitações de EP no EMA</td><td>Todos</td><td><span class="pill p-blue">Of. RI + G-60 DivLit coordenando; Sitrep mensal na Reunião Coor</span></td></tr>
+            <tr><td>CMP nas OM da FFE</td><td>Todos</td><td><span class="pill p-blue">DivAnf: alto percentual; PDU disponibilizando ~1.500 unidades</span></td></tr>
+            <tr><td>27 metralhadoras MAG — recebimento</td><td>CMatFN</td><td><span class="pill p-amber">Proposta ROA enviada JUL/25; CMatFN sem prazo definido</span></td></tr>
+            <tr><td>Cozinha de Campanha</td><td>CTecCFN</td><td><span class="pill p-amber">CTecCFN aguardando material de manutenção</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ AÇÕES PENDENTES ═══ -->
+
+<div class="sec" id="pendencias">
+  <div class="sec-hdr">
+    <div class="sec-ico">⚡</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Consolidado Final</span>
+      <div class="sec-title">Quadro Geral de Ações Pendentes</div>
+      <div class="sec-subtitle">Todas as ações identificadas que requerem acompanhamento — ordenadas por prioridade</div>
+    </div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table class="rtbl">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Ação necessária</th>
+          <th>Responsável</th>
+          <th>Prazo</th>
+          <th>Prioridade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>Empenho urgente de saldos das OM (BtlOpEsp, BFNRM, BtlCmbAe, ComDivRib) — desobstruir novos aportes e evitar recolhimento pelo COMOPNAV</td>
+          <td>CEM — Alte Adauto</td>
+          <td>IMEDIATO</td>
+          <td><span class="pill p-red">🔴 CRÍTICO</span></td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>Jammers para AAV — buscar unidades adicionais via Costa Reis (OSP MG/DF/SP/SC) + despacho CMatFN com ComFFE</td>
+          <td>CMatFN / Costa Reis / CEM</td>
+          <td>Antes de 27 MAI</td>
+          <td><span class="pill p-red">🔴 CRÍTICO</span></td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>Munição Furnas/Formosa — refazer levantamento acrescendo 20% por tipo + ações junto ao ComOpNav-20</td>
+          <td>CEM / F-40</td>
+          <td>URGENTE — antes de Furnas</td>
+          <td><span class="pill p-red">🔴 CRÍTICO</span></td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>Verificar compra de antidrones pela DGNUC — entrega antes de Furnas e Formosa</td>
+          <td>CAlte FN Adauto</td>
+          <td>Antes de Furnas</td>
+          <td><span class="pill p-red">🔴 CRÍTICO</span></td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>Alinhar com CMG Campos Mello o que as Divisões apresentarão na reunião de Furnas na segunda-feira</td>
+          <td>CAlte Cmttrref</td>
+          <td>Antes de 11 MAI (seg)</td>
+          <td><span class="pill p-amber">🟡 URGENTE</span></td>
+        </tr>
+        <tr>
+          <td>06</td>
+          <td>DOR do COC (MD) — apresentação na SC-1 + buscar outros canais para acelerar assinatura</td>
+          <td>CEM / CMatFN / F-40</td>
+          <td>Semana de 05 MAI</td>
+          <td><span class="pill p-amber">🟡 URGENTE</span></td>
+        </tr>
+        <tr>
+          <td>07</td>
+          <td>Recursos Eugênio (DGOM) — acompanhar descentralização prevista até terça (semana 11 MAI)</td>
+          <td>CEM</td>
+          <td>Semana de 11 MAI</td>
+          <td><span class="pill p-amber">🟡 URGENTE</span></td>
+        </tr>
+        <tr>
+          <td>08</td>
+          <td>Definir efetivo adotado para Furnas (455 ideal / 415 mínimo) e logística de transporte</td>
+          <td>ComFFE / ComDivAnf</td>
+          <td>Antes de Furnas</td>
+          <td><span class="pill p-amber">🟡 ALTA</span></td>
+        </tr>
+        <tr>
+          <td>09</td>
+          <td>Revalidação de granadas de Morteiro 120mm (fábrica / CMatFN)</td>
+          <td>CMatFN / F-40</td>
+          <td>Antes de Furnas</td>
+          <td><span class="pill p-amber">🟡 ALTA</span></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Revalidação de granadas de Morteiro 60mm — CEM tratar com Cappucci (determinado 29 ABR)</td>
+          <td>CEM / Cappucci</td>
+          <td>Antes de Formosa</td>
+          <td><span class="pill p-amber">🟡 ALTA</span></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Recursos Góis (EMA-20 / R$ 250k) — viabilizar troca: Góis → ComOpNav; Eugênio descentraliza para FFE em M&E</td>
+          <td>CEM / Eugênio / Góis</td>
+          <td>Articulação urgente — chega JUN</td>
+          <td><span class="pill p-amber">🟡 ALTA</span></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Efetivo em Furnas — emitir MSG limitando efetivo; subordinados justificam por MSG se precisar de mais</td>
+          <td>CEM / EM FFE</td>
+          <td>ASAP</td>
+          <td><span class="pill p-amber">🟡 ALTA</span></td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Decisão sobre cessão das Vtr Unimog SIC2MB ao CTecCFN (ou propor alternativa — 4ª Vtr sem shelter)</td>
+          <td>ComFFE / CEM</td>
+          <td>—</td>
+          <td><span class="pill p-amber">🟡 ALTA</span></td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>Retirada das 6 VTR TNE já liberadas (MSG já expedida)</td>
+          <td>OM destinatárias</td>
+          <td>Imediato</td>
+          <td><span class="pill p-amber">🟡 ALTA</span></td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>Recursos do 8ºDN (R$ 115k) para EdLit — decidir: manter transporte ou redirecionar + enviar EdLit em carretas</td>
+          <td>ComFFE / CEM</td>
+          <td>ASAP</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>Coordenação PUC-Rio — verificar gargalo com Prof. Kai Kenkel (alunos de RI em Furnas)</td>
+          <td>CEM / EM FFE</td>
+          <td>—</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>Aeroporto Furnas — homologação dos laudos de avaliação e resultado reunião SPU-MG</td>
+          <td>Engenheiro / SPU / Cmt Matta</td>
+          <td>Em tramitação</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td>Projeto TCE-MG e Secretaria Portos — aeroportos (Adauto + CMG Aderne / Marcos Matta)</td>
+          <td>CAlte FN Adauto</td>
+          <td>—</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td>Inscrição dos Pelotões Vibração do 1Btl, 3Btl e BtlArtFuzNav na Corrida do CFN</td>
+          <td>CAlte Campos Mello</td>
+          <td>Até 11 MAI</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td>27 metralhadoras MAG — cobrar prazo de entrega ao CMatFN (ROA enviado em JUL/25)</td>
+          <td>CEM / OM destinatárias</td>
+          <td>—</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td>Solicitações de EP no EMA — acompanhar mensalmente na Reunião de Coor</td>
+          <td>Todos</td>
+          <td>Até 12 SET 2026</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>22</td>
+          <td>CMP nas OM da FFE — acompanhamento nominal</td>
+          <td>Todos</td>
+          <td>Até DEZ 2026</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>23</td>
+          <td>Condutas vedadas 2026 — divulgar formalmente no âmbito da FFE (documento do Dr. Edmilson)</td>
+          <td>CEM</td>
+          <td>ASAP</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>24</td>
+          <td>CF FN Vitor — monitorar situação e avaliar impacto no Comando do BtlOpRib</td>
+          <td>ComFFE (reservado)</td>
+          <td>Contínuo</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>25</td>
+          <td>Escola Naval — 11 JUN: acionar CF Carlos Pimentel para preparação da tropa</td>
+          <td>CEM / Carlos Pimentel</td>
+          <td>Até 11 JUN 2026</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>26</td>
+          <td>Operação MARÉ APERTO (Itália, out/26) — confirmar envio de Pel do 3BtlInfFuzNav</td>
+          <td>CAlte Campos Mello</td>
+          <td>Out 2026</td>
+          <td><span class="pill p-blue">🔵 NORMAL</span></td>
+        </tr>
+        <tr>
+          <td>27</td>
+          <td>DivRib — Riverex de grande vulto com Almirante Félix (interesse em NOV)</td>
+          <td>ComDivRib / ComFFE</td>
+          <td>Novembro 2026</td>
+          <td><span class="pill p-grey">⬜ PLANEJAMENTO</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══ DIRETRIZES ═══ -->
+
+<div class="sec" id="diretrizes">
+  <div class="sec-hdr">
+    <div class="sec-ico">📌</div>
+    <div class="sec-meta">
+      <span class="sec-tag">Referência</span>
+      <div class="sec-title">Principais Decisões e Diretrizes do ComFFE</div>
+      <div class="sec-subtitle">Orientações emitidas pelo Almirante Taulois no período</div>
+    </div>
+  </div>
+
+  <div class="card prio-high">
+    <div class="card-title">Operações e Planejamento</div>
+    <div class="card-body">
+      <ul>
+        <li><strong>Munição Furnas/Formosa:</strong> levantamento deve ser refeito com acréscimo de 20% por tipo. Ações urgentes junto ao ComOpNav-20.</li>
+        <li><strong>Efetivo em Furnas:</strong> limitação necessária para controle logístico, mas sem comprometer VIP Day e DemOp. MSG a emitir.</li>
+        <li><strong>Escalações em Furnas:</strong> todas as escalações de militares devem ser submetidas à aprovação do ComFFE via MSG.</li>
+        <li><strong>Pedidos de aeronaves à ForAerNav:</strong> critérios mais rigorosos a partir de 17 ABR.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card prio-high">
+    <div class="card-title">AAV e Prontidão</div>
+    <div class="card-body">
+      <ul>
+        <li><strong>AAV:</strong> inspetores europeus/nórdicos são mais inflexíveis — atenção redobrada em toda a preparação.</li>
+        <li><strong>Jammers:</strong> não existe a opção de "não apresentar e incluir em plano de aquisição". Solução física obrigatória.</li>
+        <li><strong>Armários (ND 52):</strong> não é prioridade — verba direcionada ao Centro de Comando e Controle.</li>
+        <li><strong>Helicóptero francês:</strong> não haverá tropa brasileira na AAV em helicóptero francês.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card prio-med">
+    <div class="card-title">Gestão e Comunicação</div>
+    <div class="card-body">
+      <ul>
+        <li><strong>Técnica do silêncio:</strong> não se aplica ao retorno de informações ao Comandante. Coordenações devem ser reportadas.</li>
+        <li><strong>Pedidos de pequena monta:</strong> CEM deve alertar CEM das Forças Subordinadas — não encaminhar pedidos de pequena monta ao ComOpNav.</li>
+        <li><strong>Recursos:</strong> prioridade absoluta é Furnas. Engenharia financeira para viabilizar envio de recursos até terça (semana 11 MAI).</li>
+        <li><strong>Reunião AAV:</strong> deve ser apresentada por cada Força, não pelo Cappucci centralizando.</li>
+        <li><strong>Liderança:</strong> independe de recursos orçamentários.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+// Highlight active nav link on scroll
+const sections = document.querySelectorAll('.sec');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.2, rootMargin: '-80px 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
